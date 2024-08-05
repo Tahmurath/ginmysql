@@ -1,0 +1,7 @@
+go mod init vida
+
+go get -u github.com/gin-gonic/gin
+
+go get github.com/githubnemo/CompileDaemon
+
+go get github.com/joho/godotenv
