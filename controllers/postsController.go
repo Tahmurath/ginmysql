@@ -9,13 +9,14 @@ import (
 
 func PostsCreate(c *gin.Context) {
 
-	var body struct {
-		Body  string
-		Title string
-	}
-	c.Bind(&body)
+	// var body struct {
+	// 	Body  string
+	// 	Title string
+	// }
+	var posted models.Post
+	c.Bind(&posted)
 
-	post := models.Post{Title: body.Title, Body: body.Body}
+	post := models.Post{Title: posted.Title, Body: posted.Body}
 
 	result := initializers.DB.Create(&post)
 
@@ -35,7 +36,17 @@ func PostIndex(c *gin.Context) {
 	initializers.DB.Find(&posts)
 
 	c.JSON(200, gin.H{
-		"post": posts,
+		"posts": posts,
 	})
+}
 
+func PostShow(c *gin.Context) {
+	id := c.Param("id")
+
+	var post models.Post
+	initializers.DB.First(&post, id)
+
+	c.JSON(200, gin.H{
+		"post": post,
+	})
 }

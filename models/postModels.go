@@ -8,4 +8,7 @@ type Post struct {
 	gorm.Model
 	Title string `json:"post_title"`
 	Body  string `json:"post_body"`
+	// CreatedAt string
+	// UpdatedAt string
+	// DeletedAt string
 }

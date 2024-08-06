@@ -17,6 +17,7 @@ func main() {
 
 	r.POST("/posts", controllers.PostsCreate)
 	r.GET("/posts", controllers.PostIndex)
+	r.GET("/posts/:id", controllers.PostShow)
 
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
