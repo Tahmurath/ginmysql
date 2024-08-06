@@ -50,3 +50,33 @@ func PostShow(c *gin.Context) {
 		"post": post,
 	})
 }
+
+func PostUpdate(c *gin.Context) {
+	id := c.Param("id")
+
+	var posted models.Post
+	c.Bind(&posted)
+
+	var post models.Post
+	initializers.DB.First(&post, id)
+
+	initializers.DB.Model(&post).Updates(models.Post{
+		Title: posted.Title,
+		Body:  posted.Body,
+	})
+
+	c.JSON(200, gin.H{
+		"post": post,
+	})
+}
+
+func PostDelete(c *gin.Context) {
+	id := c.Param("id")
+
+	//var post models.Post
+	//initializers.DB.First(&post, id)
+
+	initializers.DB.Delete(&models.Post{}, id)
+
+	c.Status(200)
+}
