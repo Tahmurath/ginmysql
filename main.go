@@ -1,6 +1,7 @@
 package main
 
 import (
+	"vida/controllers"
 	"vida/initializers"
 
 	"github.com/gin-gonic/gin"
@@ -14,11 +15,8 @@ func main() {
 
 	r := gin.Default()
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	r.POST("/posts", controllers.PostsCreate)
+	r.GET("/posts", controllers.PostIndex)
 
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
