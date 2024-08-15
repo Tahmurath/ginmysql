@@ -9,10 +9,6 @@ import (
 
 func PostsCreate(c *gin.Context) {
 
-	// var body struct {
-	// 	Body  string
-	// 	Title string
-	// }
 	var posted models.Post
 	c.Bind(&posted)
 
