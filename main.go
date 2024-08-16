@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"vida/initializers"
 	"vida/routes"
 
@@ -8,13 +9,17 @@ import (
 )
 
 func init() {
-	gin.SetMode(gin.ReleaseMode)
+	//gin.SetMode(gin.ReleaseMode)
 	initializers.LoadEnvVars()
 	initializers.ConnectDb()
 }
 func main() {
 
 	r := gin.Default()
+	r.Use(func(ctx *gin.Context) {
+		fmt.Println("Global middleware")
+		ctx.Next()
+	})
 
 	routes.SetupRoutes(r)
 

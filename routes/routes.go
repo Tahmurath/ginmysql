@@ -7,4 +7,5 @@ import (
 func SetupRoutes(r *gin.Engine) {
 
 	PostsRoutes(r)
+
 }
