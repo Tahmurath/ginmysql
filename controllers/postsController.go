@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"net/http"
 	"vida/initializers"
 	"vida/models"
 
@@ -10,7 +11,12 @@ import (
 func PostsCreate(c *gin.Context) {
 
 	var posted models.Post
-	c.Bind(&posted)
+	//c.Bind(&posted)
+
+	if err := c.ShouldBindJSON(&posted); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
 	post := models.Post{Title: posted.Title, Body: posted.Body}
 
@@ -51,7 +57,12 @@ func PostUpdate(c *gin.Context) {
 	id := c.Param("id")
 
 	var posted models.Post
-	c.Bind(&posted)
+	//c.Bind(&posted)
+
+	if err := c.ShouldBindJSON(&posted); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
 	var post models.Post
 	initializers.DB.First(&post, id)
