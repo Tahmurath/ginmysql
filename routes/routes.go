@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"vida/controllers"
+	SiteControllers "vida/controllers/site"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,7 +19,7 @@ func SetupRoutes(r *gin.Engine) {
 	// 	return
 	// }
 
-	r.GET("/", controllers.Index)
+	r.GET("/", SiteControllers.Index)
 	//fmt.Println(os.Getenv("HOME_ROUTE"))
 
 	PostsRoutes(r)
