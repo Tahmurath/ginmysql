@@ -1,19 +1,19 @@
 package routes
 
 import (
-	"resedist/controllers/user"
+	"resedist/controllers/post"
 	"resedist/services"
 
 	"github.com/gin-gonic/gin"
 )
 
 func RegisterRoutes(router *gin.Engine) {
-	userService := services.NewUserService()
-	userController := user.NewUserController(userService)
+	postService := services.NewPostService()
+	postController := post.NewPostController(postService)
 
-	userRoutes := router.Group("/users")
+	postRoutes := router.Group("/posts")
 	{
-		userRoutes.GET("/:id", userController.GetUser)
+		postRoutes.GET("/:id", postController.GetPost)
 		// مسیرهای دیگر کاربران
 	}
 

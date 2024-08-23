@@ -2,7 +2,8 @@ package routes
 
 import (
 	"fmt"
-	"vida/controllers"
+	"resedist/controllers/post"
+	"resedist/services"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,9 +17,12 @@ func PostsRoutes(r *gin.Engine) {
 		ctx.Next()
 	})
 
-	posts.POST("/", controllers.PostsCreate)
-	posts.GET("/", controllers.PostIndex)
-	posts.GET("/:id", controllers.PostShow)
-	posts.PUT("/:id", controllers.PostUpdate)
-	posts.DELETE("/:id", controllers.PostDelete)
+	postService := services.NewPostService()
+	postController := post.NewPostController(postService)
+
+	posts.POST("/", postController.GetPost)
+	// posts.GET("/", PostController.PostIndex)
+	// posts.GET("/:id", PostController.PostShow)
+	// posts.PUT("/:id", PostController.PostUpdate)
+	// posts.DELETE("/:id", PostController.PostDelete)
 }
